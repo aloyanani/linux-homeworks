@@ -3,7 +3,7 @@
 
 class Complex
 {
-    // a + bi, (a, b)
+   
 
 public:
    int a;
@@ -22,10 +22,8 @@ public:
    Complex operator*(int num);
 
    // A function that returns the absolute value of a complex number
-   double absolute_value()
-   {
-     return sqrt(a * a + b * b);
-   }
+   double absolute_value();
+
    friend std::ostream& operator<<(std::ostream& out, const Complex& c)
    {
       out << "(" << c.a << ", " << c.b << ")";
