@@ -35,7 +35,7 @@ int main(int argc, char** argv)
     
     while(true)
     {
-        // Check if the file couldn't be opened.
+        // Read the file.
         ssize_t reading_bytes = read(fd, buf, BUFFER_SIZE);
 
         // Check if there was an error while reading.
