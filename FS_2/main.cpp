@@ -85,7 +85,7 @@ int main(int argc, char** argv )
     exit(errno);
    }
 
-   int close_new_file = close(fd_file);
+   int close_new_file = close(new_fd);
 
    // Check if there was an error while closing the file.
    if(close_new_file < 0)
