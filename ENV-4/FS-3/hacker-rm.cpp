@@ -57,6 +57,16 @@ int main(int argc, char** argv)
 
     }
 
+
+    // close the file.
+    int close_file = close(fd);
+    if(close_file < 0)
+    {
+        std::cerr << strerror(errno) << std::endl;
+        exit(errno);
+    }
+
+    
     // Devete the file from the file system.
     int unlink_file = unlink(file);
     if(unlink_file < 0)
@@ -66,12 +76,6 @@ int main(int argc, char** argv)
 
         }
 
-    // close the file.
-    int close_file = close(fd);
-    if(close_file < 0)
-    {
-        std::cerr << strerror(errno) << std::endl;
-        exit(errno);
-    }
+    
     return 0;
 }
