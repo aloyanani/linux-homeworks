@@ -26,7 +26,7 @@ int main(int argc, char** argv)
     // Check if the source file couldn't be opened.
     if (fd_source_file < 0)
     {
-        std::cerr << "Error opening source file: " << strerror(errno) << std::endl;
+        std::cerr << strerror(errno) << std::endl;
         exit(errno);
     }
 
@@ -36,7 +36,7 @@ int main(int argc, char** argv)
     // Check if the destination file couldn't be opened.
     if (fd_dest_file < 0)
     {
-        std::cerr << "Error opening destination file: " << strerror(errno) << std::endl;
+        std::cerr << strerror(errno) << std::endl;
         exit(errno);
     }
 
@@ -51,7 +51,7 @@ int main(int argc, char** argv)
         // Check if there was an error while reading.
         if (read_bytes < 0)
         {
-            std::cerr << "Error reading from source file: " << strerror(errno) << std::endl;
+            std::cerr << strerror(errno) << std::endl;
             exit(errno);
         }
 
@@ -66,7 +66,7 @@ int main(int argc, char** argv)
 
         if (write_bytes < 0)
         {
-            std::cerr << "Error writing to destination file: " << strerror(errno) << std::endl;
+            std::cerr << strerror(errno) << std::endl;
             exit(errno);
         }
 
