@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     }
 
     char* source_file_path = argv[1];
-    char* destination_path = argv[2];  // Corrected variable name.
+    char* destination_path = argv[2];
 
     // Open the source file in read-only mode.
     int fd_source_file = open(source_file_path, O_RDONLY);
