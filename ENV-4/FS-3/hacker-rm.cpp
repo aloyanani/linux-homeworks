@@ -58,7 +58,7 @@ int main(int argc, char** argv)
     }
 
 
-    // close the file.
+    // Close the file.
     int close_file = close(fd);
     if(close_file < 0)
     {
@@ -67,7 +67,7 @@ int main(int argc, char** argv)
     }
 
     
-    // Devete the file from the file system.
+    // Delete the file from the file system.
     int unlink_file = unlink(file);
     if(unlink_file < 0)
         {
