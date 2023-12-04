@@ -65,26 +65,5 @@ void parallel_scheduler::worker_thread() {
     }
 }
 
-// Sample function to be executed in the thread pool
-void sample_function(void* arg) {
-    int* value = static_cast<int*>(arg);
-    std::cout << "Thread ID: " << std::this_thread::get_id() << ", Value: " << *value << std::endl;
-    // Simulate some work
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-}
 
-// Main function for demonstration purposes
-int main() {
-    // Create a thread pool with a capacity of 3
-    parallel_scheduler scheduler(3);
 
-    // Submit tasks to the thread pool
-    for (int i = 0; i < 10; ++i) {
-        scheduler.run(sample_function, new int(i));
-    }
-
-    // Allow some time for tasks to complete
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-
-    return 0;
-}
