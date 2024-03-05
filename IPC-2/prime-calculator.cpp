@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 
+// Function to check if a number is prime
 bool is_prime(int num)
 {
     if(num <= 1)
@@ -23,7 +24,7 @@ bool is_prime(int num)
 }
 
 
-
+// Function to find the m-th prime number
 int prime_number(int m)
 {
     int count = 0;
@@ -48,9 +49,13 @@ int prime_number(int m)
 
 int main()
 {
+    // Pipe for sending input from parent to child
     int pipefd_1[2];
+
+    // Pipe for sending output from child to parent
     int pipefd_2[2];
 
+    // Creating pipes
     int pipe_res_1 = pipe(pipefd_1);
     if(pipe_res_1 < 0)
     {
@@ -65,6 +70,7 @@ int main()
         exit(errno);
     }
 
+    // Creating a child process
     int pid = fork();
 
     if(pid < 0)
@@ -74,9 +80,13 @@ int main()
     }
 
 
+    // Child process
     if(pid == 0)
     {
+        // Close write end of pipe 1
         close(pipefd_1[1]);
+
+        // Close read end of pipe 2
         close(pipefd_2[0]);
 
 
@@ -85,6 +95,7 @@ int main()
 
         while(true)
         {
+            // Read input from parent
             int read_res = read(pipefd_1[0], &m, sizeof(int));
 
             if(read_res < 0)
@@ -93,8 +104,10 @@ int main()
                exit(errno); 
             }
 
+            // Calculate m-th prime number
             int m_th_prime_num = prime_number(m);
 
+            // Send calculated prime number to parent
             int write_res = write(pipefd_2[1], &m_th_prime_num, sizeof(int));
 
             if(write_res < 0)
@@ -107,9 +120,14 @@ int main()
         }
     }
 
+
+    // Parent process
     if(pid > 0)
     {
+        // Close read end of pipe 1
         close(pipefd_1[0]);
+
+        // Close write end of pipe 2
         close(pipefd_2[1]);
 
         std::string input;
@@ -129,6 +147,7 @@ int main()
 
             std::cout << "Sending " << m << " to the child process..." << std::endl;
 
+            // Send input to child process
             int write_res = write(pipefd_1[1], &m, sizeof(int));
 
             if(write_res < 0)
@@ -141,6 +160,7 @@ int main()
 
             int res;
 
+            // Read response from child process
             int read_res = read(pipefd_2[0], &res, sizeof(int));
 
             if(read_res < 0)
